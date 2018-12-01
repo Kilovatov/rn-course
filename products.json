@@ -1,0 +1,30 @@
+{
+  "product1" : {
+    "description": "This is an awesome product. You should try it for sure. Let's put here more text. Let's put here more text. Let's put here more text. Let's put here more text.",
+    "logo": "bookmark-o"
+  },
+  "product2" : {
+    "description": "This is an awesome product. You should try it for sure. Let's put here more text. Let's put here more text. Let's put here more text. Let's put here more text.",
+    "logo": "phone"
+  },
+  "product3" : {
+    "description": "This is an awesome product. You should try it for sure. Let's put here more text. Let's put here more text. Let's put here more text. Let's put here more text.",
+    "logo": "lemon-o"
+  },
+  "product4" : {
+    "description": "This is an awesome product. You should try it for sure. Let's put here more text. Let's put here more text. Let's put here more text. Let's put here more text.",
+    "logo": "trophy"
+  },
+  "product5" : {
+    "description": "This is an awesome product. You should try it for sure. Let's put here more text. Let's put here more text. Let's put here more text. Let's put here more text.",
+    "logo": "thumbs-o-up"
+  },
+  "product6" : {
+    "description": "This is an awesome product. You should try it for sure. Let's put here more text. Let's put here more text. Let's put here more text. Let's put here more text.",
+    "logo": "smile-o"
+  },
+  "product7" : {
+    "description": "This is an awesome product. You should try it for sure. Let's put here more text. Let's put here more text. Let's put here more text. Let's put here more text.",
+    "logo": "gears"
+  }
+}
