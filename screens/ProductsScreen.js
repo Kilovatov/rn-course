@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import {FlatList, Text, TouchableHighlight, View} from 'react-native';
+import React, {Component} from 'react';
+import {FlatList, Text, View} from 'react-native';
 import products from '../products';
 import styles from '../styles/styles'
-import Icon from "react-native-vector-icons/FontAwesome";
+import {ProductRow} from "../components/ProductRow";
 
 export default class Products extends Component {
     render() {
@@ -17,15 +17,7 @@ export default class Products extends Component {
                     }
                     renderItem={
                         ({item}) =>
-                        <View style={styles.row}>
-                            <Icon style={styles.iconBefore} name={item.logo} size={20} color="#000" />
-                            <Text style={styles.buttonText}>
-                                {item.key}
-                            </Text>
-                            <TouchableHighlight style={styles.iconAfter} onPress={() => navigate('Product', {product: item})}>
-                                <Icon name="arrow-circle-right" size={20} color="#000"/>
-                            </TouchableHighlight>
-                        </View>
+                        <ProductRow item={item} onPress={() => navigate('Product', {product: item})}/>
                     }
                 />
             </View>
