@@ -68,5 +68,29 @@ export default StyleSheet.create({
     },
     productContainer: {
         borderWidth: 1,
+    },
+    offlineContainer: {
+        backgroundColor: '#b52424',
+        height: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'row',
+        width: '100%',
+        position: 'absolute',
+        top: 0
+    },
+    offlineText: {
+        color: '#fff'
+    },
+    offlineHeader: {
+        fontSize: 40,
+    },
+    container: {
+        ...StyleSheet.absoluteFillObject,
+        height: "100%",
+        width: "100%"
+    },
+    map: {
+        ...StyleSheet.absoluteFillObject,
     }
 });

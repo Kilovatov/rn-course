@@ -11,8 +11,8 @@ export default class ProductScreen extends Component {
             <View style={styles.flexContainer}>
                 <View style={styles.productContainer}>
                 <Text style={styles.heading}>
-                    <Icon name={product.logo} size={40} color="#000" />
-                    <Text style={styles.productName}>{product.key}</Text>
+                        <Icon name={"map"} size={40} color="#000" onPress={() => navigation.navigate('Map',  {product: product})}/>
+                    <Text style={styles.productName}>{product.name}</Text>
                 </Text>
                 <Text style={styles.description}> {product.description} </Text>
                 <TouchableHighlight onPress={() => navigation.navigate('Products')}>

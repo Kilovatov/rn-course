@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { TextInput, View, Text, TouchableHighlight } from "react-native";
+import { TextInput, View, Text, TouchableHighlight, NetInfo } from "react-native";
 import styles from '../styles/styles'
 import Icon from 'react-native-vector-icons/FontAwesome';
+import OfflineNote from '../components/OfflineNote';
 
 export default class LoginScreen extends Component {
-    state = {email: '', password: '', error: ''};
+    state = {email: '', password: '', error: '', offline: false};
     login = () => {
-        fetch(' http://ecsc00a02fb3.epam.com/index.php/rest/V1/integration/customer/token', {
+        const {navigate} = this.props.navigation;
+        fetch('http://ecsc00a02fb3.epam.com/index.php/rest/V1/integration/customer/token', {
             method: 'post',
             body: `{"username":"${this.state.email}", "password":"${this.state.password}"}`,
             headers: {
@@ -14,17 +16,36 @@ export default class LoginScreen extends Component {
             }
         }).then((response) => response.json()).then((token) => {
             if (typeof token === 'string') {
-                const {navigate} = this.props.navigation;
                 navigate('Products');
             } else {
                 this.setState({error: token.message})
             }
+        }, (error) => {
+            this.setState({error: error.message});
+            navigate('Products');
         });
     };
+    handleConnectionChange = (isConnected) => {
+        this.setState({ offline: !isConnected });
+    };
+
+    componentDidMount() {
+        NetInfo.isConnected.addEventListener('connectionChange', this.handleConnectionChange);
+
+        NetInfo.isConnected.fetch().done(
+            (isConnected) => { this.setState({ offline: !isConnected }); }
+        );
+    }
+
+    componentWillUnmount() {
+        NetInfo.isConnected.removeEventListener('connectionChange', this.handleConnectionChange);
+    }
+
     render() {
         return (
             <View>
-                <Icon style={styles.smile}name="smile-o" size={32} color="#000" />
+                {this.state.offline && <OfflineNote/>}
+                <Icon style={styles.smile} name="smile-o" size={32} color="#000" />
                 <Text style={styles.welcome}>Friday's shop</Text>
                 <TouchableHighlight>
                     <View style={{...styles.longButton, ...styles.loginButton}}>
