@@ -10,15 +10,17 @@ export default class Products extends Component {
         this.setState({refreshing: true});
         fetch('http://ecsc00a02fb3.epam.com/rest/V1/products?searchCriteria[pageSize]=' + this.state.productsNumber)
             .then((response) => response.json())
-            .then((products) => {
+            .then((prods) => {
+                const newProducts = prods.items.map(product => {
+                    return {
+                        id: product.id,
+                        name: product.name,
+                        description: product.price,
+                        logo: "thumbs-o-up"
+                    };
+                });
                 this.setState({
-                    products: products.map(product => {
-                        return {
-                            name: product.name,
-                            description: product.price,
-                            logo: "thumbs-o-up"
-                        };
-                    }),
+                    products: {items: newProducts},
                     refreshing: false
                 });
             }).catch(error => {
@@ -36,9 +38,9 @@ export default class Products extends Component {
             <View style={{flex: 1}}>
                 <Text style={styles.welcome}>Products</Text>
                 <FlatList
-                    keyExtractor={(item) => item.id}
+                    keyExtractor={(item) => '' + item.id}
                     initialNumToRender={13}
-                    data={products.items}
+                    data={this.state.products.items}
                     renderItem={
                         ({item}) =>
                             <ProductRow item={item} onPress={() => navigate('Product', {product: item})}/>
@@ -50,9 +52,10 @@ export default class Products extends Component {
                         />
                     }
                     onEndReached={() => {
-                        this.setState({productsNumber: this.state.productsNumber + 13});
+                        this.setState({productsNumber: this.state.productsNumber + 5});
                         this._onRefresh();
                     }}
+                    onEndReachedThreshold={0.2}
                 />
                 <View style={{...styles.longButton}}>
                     <Text style={styles.buttonText}>
