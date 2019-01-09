@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
-import { TextInput, View, Text, TouchableHighlight, NetInfo } from "react-native";
+import { TextInput, View, Text, TouchableHighlight, NetInfo, Animated, Easing } from "react-native";
 import styles from '../styles/styles'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import OfflineNote from '../components/OfflineNote';
 
 export default class LoginScreen extends Component {
-    state = {email: '', password: '', error: '', offline: false};
+    state = {email: '', password: '', error: '', offline: false, fadeAnim: new Animated.Value(0), colorAnim: new Animated.Value(0)};
     login = () => {
+            Animated.timing(
+                this.state.fadeAnim,
+                {
+                    toValue: 0,
+                    duration: 100,
+                }
+            ).start();
         const {navigate} = this.props.navigation;
         fetch('http://ecsc00a02fb3.epam.com/index.php/rest/V1/integration/customer/token', {
             method: 'post',
@@ -18,7 +25,23 @@ export default class LoginScreen extends Component {
             if (typeof token === 'string') {
                 navigate('Products');
             } else {
-                this.setState({error: token.message})
+                this.setState({error: token.message});
+                Animated.sequence([
+                    Animated.spring(
+                        this.state.fadeAnim,
+                        {
+                            toValue: 1,
+                        }
+                    ),
+                    Animated.timing(
+                        this.state.colorAnim,
+                        {
+                            toValue: 300,
+                            duration: 1500,
+                            easing: Easing.inOut(Easing.ease),
+                        }
+                    )
+                ]).start();
             }
         }, (error) => {
             this.setState({error: error.message});
@@ -42,6 +65,12 @@ export default class LoginScreen extends Component {
     }
 
     render() {
+        let { fadeAnim, colorAnim } = this.state;
+        const color = colorAnim.interpolate({
+            inputRange: [0, 100, 300],
+            outputRange: ['rgba(255, 0, 0, 1)', 'rgba(0, 0, 0, 1)', 'rgba(255, 100, 100, 1)']
+        });
+
         return (
             <View>
                 {this.state.offline && <OfflineNote/>}
@@ -75,11 +104,11 @@ export default class LoginScreen extends Component {
                         </Text>
                     </View>
                 </TouchableHighlight>
-                <View style={{...styles.longButton}}>
-                    <Text style={styles.buttonText}>
+                <Animated.View style={{...styles.longButton, opacity: fadeAnim}}>
+                    <Animated.Text style={{...styles.buttonText, color: color}}>
                         {this.state.error}
-                    </Text>
-                </View>
+                    </Animated.Text>
+                </Animated.View>
             </View>
 
         );

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableHighlight } from "react-native";
+import { View, Text, TouchableHighlight, LayoutAnimation } from "react-native";
 import styles from '../styles/styles'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -15,7 +15,11 @@ export default class ProductScreen extends Component {
                     <Text style={styles.productName}>{product.name}</Text>
                 </Text>
                 <Text style={styles.description}> {product.description} </Text>
-                <TouchableHighlight onPress={() => navigation.navigate('Products')}>
+                <TouchableHighlight onPress={() => {
+                    LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
+                    navigation.navigate('Products');
+                    }
+                }>
                     <View style={{...styles.productsButton, ...styles.loginButton}}>
                         <Text style={styles.buttonText}>
                             All products
