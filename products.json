@@ -1,30 +1,100 @@
 {
-  "product1" : {
-    "description": "This is an awesome product. You should try it for sure. Let's put here more text. Let's put here more text. Let's put here more text. Let's put here more text.",
-    "logo": "bookmark-o"
-  },
-  "product2" : {
-    "description": "This is an awesome product. You should try it for sure. Let's put here more text. Let's put here more text. Let's put here more text. Let's put here more text.",
-    "logo": "phone"
-  },
-  "product3" : {
-    "description": "This is an awesome product. You should try it for sure. Let's put here more text. Let's put here more text. Let's put here more text. Let's put here more text.",
-    "logo": "lemon-o"
-  },
-  "product4" : {
-    "description": "This is an awesome product. You should try it for sure. Let's put here more text. Let's put here more text. Let's put here more text. Let's put here more text.",
-    "logo": "trophy"
-  },
-  "product5" : {
-    "description": "This is an awesome product. You should try it for sure. Let's put here more text. Let's put here more text. Let's put here more text. Let's put here more text.",
-    "logo": "thumbs-o-up"
-  },
-  "product6" : {
-    "description": "This is an awesome product. You should try it for sure. Let's put here more text. Let's put here more text. Let's put here more text. Let's put here more text.",
-    "logo": "smile-o"
-  },
-  "product7" : {
-    "description": "This is an awesome product. You should try it for sure. Let's put here more text. Let's put here more text. Let's put here more text. Let's put here more text.",
-    "logo": "gears"
-  }
+  "items": [
+    {
+      "id": "1",
+      "name": "product1",
+      "description": "This is an awesome product. You should try it for sure. Let's put here more text. Let's put here more text. Let's put here more text. Let's put here more text.",
+      "logo": "bookmark-o"
+    },
+    {
+      "id": "2",
+      "name": "product2",
+      "description": "This is an awesome product. You should try it for sure. Let's put here more text. Let's put here more text. Let's put here more text. Let's put here more text.",
+      "logo": "phone"
+    },
+    {
+      "id": "3",
+      "name": "product3",
+      "description": "This is an awesome product. You should try it for sure. Let's put here more text. Let's put here more text. Let's put here more text. Let's put here more text.",
+      "logo": "lemon-o"
+    },
+    {
+      "id": "4",
+      "name": "product4",
+      "description": "This is an awesome product. You should try it for sure. Let's put here more text. Let's put here more text. Let's put here more text. Let's put here more text.",
+      "logo": "trophy"
+    },
+    {
+      "id": "5",
+      "name": "product5",
+      "description": "This is an awesome product. You should try it for sure. Let's put here more text. Let's put here more text. Let's put here more text. Let's put here more text.",
+      "logo": "thumbs-o-up"
+    },
+    {
+      "id": "6",
+      "name": "product6",
+      "description": "This is an awesome product. You should try it for sure. Let's put here more text. Let's put here more text. Let's put here more text. Let's put here more text.",
+      "logo": "smile-o"
+    },
+    {
+      "id": "7",
+      "name": "product7",
+      "description": "This is an awesome product. You should try it for sure. Let's put here more text. Let's put here more text. Let's put here more text. Let's put here more text.",
+      "logo": "gears"
+    },
+    {
+      "id": "8",
+      "name": "product1",
+      "description": "This is an awesome product. You should try it for sure. Let's put here more text. Let's put here more text. Let's put here more text. Let's put here more text.",
+      "logo": "bookmark-o"
+    },
+    {
+      "id": "9",
+      "name": "product2",
+      "description": "This is an awesome product. You should try it for sure. Let's put here more text. Let's put here more text. Let's put here more text. Let's put here more text.",
+      "logo": "phone"
+    },
+    {
+      "id": "10",
+      "name": "product3",
+      "description": "This is an awesome product. You should try it for sure. Let's put here more text. Let's put here more text. Let's put here more text. Let's put here more text.",
+      "logo": "lemon-o"
+    },
+    {
+      "id": "11",
+      "name": "product4",
+      "description": "This is an awesome product. You should try it for sure. Let's put here more text. Let's put here more text. Let's put here more text. Let's put here more text.",
+      "logo": "trophy"
+    },
+    {
+      "id": "12",
+      "name": "product5",
+      "description": "This is an awesome product. You should try it for sure. Let's put here more text. Let's put here more text. Let's put here more text. Let's put here more text.",
+      "logo": "thumbs-o-up"
+    },
+    {
+      "id": "13",
+      "name": "product6",
+      "description": "This is an awesome product. You should try it for sure. Let's put here more text. Let's put here more text. Let's put here more text. Let's put here more text.",
+      "logo": "smile-o"
+    },
+    {
+      "id": "14",
+      "name": "product7",
+      "description": "This is an awesome product. You should try it for sure. Let's put here more text. Let's put here more text. Let's put here more text. Let's put here more text.",
+      "logo": "gears"
+    },
+    {
+      "id": "15",
+      "name": "product7",
+      "description": "This is an awesome product. You should try it for sure. Let's put here more text. Let's put here more text. Let's put here more text. Let's put here more text.",
+      "logo": "gears"
+    },
+    {
+      "id": "16",
+      "name": "product7",
+      "description": "This is an awesome product. You should try it for sure. Let's put here more text. Let's put here more text. Let's put here more text. Let's put here more text.",
+      "logo": "gears"
+    }
+  ]
 }
