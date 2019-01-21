@@ -1,11 +1,39 @@
 import React, { Component } from 'react';
-import { TextInput, View, Text, TouchableHighlight, NetInfo, Animated, Easing } from "react-native";
+import { TextInput, View, Text, TouchableHighlight, NetInfo, Animated, Easing, AsyncStorage } from "react-native";
 import styles from '../styles/styles'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import OfflineNote from '../components/OfflineNote';
 
 export default class LoginScreen extends Component {
-    state = {email: '', password: '', error: '', offline: false, fadeAnim: new Animated.Value(0), colorAnim: new Animated.Value(0)};
+    state = {
+        email: '',
+        password: '',
+        error: '',
+        offline: false,
+        fadeAnim: new Animated.Value(0),
+        colorAnim: new Animated.Value(0),
+        loggedIn: false
+    };
+
+    _storeData = async (email, token) => {
+        try {
+            await AsyncStorage.setItem('email', email);
+            await AsyncStorage.setItem('token', token);
+        } catch (error) {}
+    };
+
+    _retrieveData = async () => {
+        try {
+            const email = await AsyncStorage.getItem('email');
+            const token = await AsyncStorage.getItem('token');
+            if (email !== null && token !== null ) {
+                this.setState({email: email, loggedIn: true});
+            }
+        } catch (error) {}
+    };
+
+    proceed = () => this.props.navigation.navigate('Products');
+
     login = () => {
             Animated.timing(
                 this.state.fadeAnim,
@@ -23,7 +51,9 @@ export default class LoginScreen extends Component {
             }
         }).then((response) => response.json()).then((token) => {
             if (typeof token === 'string') {
-                navigate('Products');
+                this._storeData(this.state.email, token).then(
+                    () => navigate('Products')
+                );
             } else {
                 this.setState({error: token.message});
                 Animated.sequence([
@@ -58,6 +88,8 @@ export default class LoginScreen extends Component {
         NetInfo.isConnected.fetch().done(
             (isConnected) => { this.setState({ offline: !isConnected }); }
         );
+
+        this._retrieveData();
     }
 
     componentWillUnmount() {
@@ -104,6 +136,15 @@ export default class LoginScreen extends Component {
                         </Text>
                     </View>
                 </TouchableHighlight>
+                {this.state.loggedIn &&
+                    <TouchableHighlight onPress={this.proceed}>
+                        <View style={{...styles.longButton, ...styles.continueButton}}>
+                            <Text style={styles.buttonText}>
+                                Continue as {this.state.email}
+                            </Text>
+                        </View>
+                    </TouchableHighlight>
+                }
                 <Animated.View style={{...styles.longButton, opacity: fadeAnim}}>
                     <Animated.Text style={{...styles.buttonText, color: color}}>
                         {this.state.error}
