@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {FlatList, Text, View, RefreshControl} from 'react-native';
+import {FlatList, Text, View, RefreshControl, LayoutAnimation} from 'react-native';
 import products from '../products';
 import styles from '../styles/styles'
 import {ProductRow} from "../components/ProductRow";
@@ -43,7 +43,10 @@ export default class Products extends Component {
                     data={this.state.products.items}
                     renderItem={
                         ({item}) =>
-                            <ProductRow item={item} onPress={() => navigate('Product', {product: item})}/>
+                            <ProductRow item={item} onPress={() => {
+                                LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
+                                navigate('Product', {product: item});
+                            }}/>
                     }
                     refreshControl={
                         <RefreshControl
@@ -52,6 +55,7 @@ export default class Products extends Component {
                         />
                     }
                     onEndReached={() => {
+                        LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
                         this.setState({productsNumber: this.state.productsNumber + 5});
                         this._onRefresh();
                     }}
