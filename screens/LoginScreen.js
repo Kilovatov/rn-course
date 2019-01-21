@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { TextInput, View, Text, TouchableHighlight, NetInfo, Animated, Easing, AsyncStorage } from "react-native";
+import { TextInput, View, Text, TouchableHighlight, NetInfo, Animated, Easing, AsyncStorage, Vibration } from "react-native";
 import styles from '../styles/styles'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import OfflineNote from '../components/OfflineNote';
+
+const PATTERN = [100, 500]
 
 export default class LoginScreen extends Component {
     state = {
@@ -72,6 +74,7 @@ export default class LoginScreen extends Component {
                         }
                     )
                 ]).start();
+                Vibration.vibrate(PATTERN);
             }
         }, (error) => {
             this.setState({error: error.message});
