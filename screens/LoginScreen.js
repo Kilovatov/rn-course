@@ -4,7 +4,7 @@ import styles from '../styles/styles'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import OfflineNote from '../components/OfflineNote';
 
-const PATTERN = [100, 500]
+const PATTERN = [100, 500, 500];
 
 export default class LoginScreen extends Component {
     state = {
