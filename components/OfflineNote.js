@@ -28,7 +28,8 @@ class OfflineNote extends Component {
                     <View>
                         <View>
                             <Text style={{...styles.buttonText, ...styles.offlineHeader}}>
-                                There is no internet connection
+                                There is no internet connection.
+                                Please turn network connection on and try again.
                             </Text>
                             <TouchableHighlight
                                 onPress={() => {

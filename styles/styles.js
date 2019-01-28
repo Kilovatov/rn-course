@@ -17,6 +17,13 @@ export default StyleSheet.create({
         borderRadius:2,
         marginBottom: 10
     },
+    continueButton: {
+        borderColor: "#333333",
+        borderWidth: 3,
+        color: "#333333",
+        borderRadius:2,
+        marginTop: 10
+    },
     longButton: {
         width: "75%",
         marginLeft: "12.5%",
