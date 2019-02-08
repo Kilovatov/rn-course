@@ -3,6 +3,7 @@ import { TextInput, View, Text, TouchableHighlight, NetInfo, Animated, Easing, A
 import styles from '../styles/styles'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import OfflineNote from '../components/OfflineNote';
+import SplashScreen from 'react-native-splash-screen'
 
 const PATTERN = [100, 500, 500];
 
@@ -86,6 +87,7 @@ export default class LoginScreen extends Component {
     };
 
     componentDidMount() {
+        SplashScreen.hide();
         NetInfo.isConnected.addEventListener('connectionChange', this.handleConnectionChange);
 
         NetInfo.isConnected.fetch().done(
