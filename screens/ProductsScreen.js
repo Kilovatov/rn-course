@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {FlatList, Text, View, RefreshControl, LayoutAnimation} from 'react-native';
+import {FlatList, Text, View, RefreshControl, LayoutAnimation, TouchableHighlight} from 'react-native';
 import products from '../products';
 import styles from '../styles/styles'
 import {ProductRow} from "../components/ProductRow";
@@ -34,6 +34,7 @@ export default class Products extends Component {
 
     render() {
         const {navigate} = this.props.navigation;
+        const {amount} = this.props.screenProps;
         return (
             <View style={{flex: 1}}>
                 <Text style={styles.welcome}>Products</Text>
@@ -61,6 +62,15 @@ export default class Products extends Component {
                     }}
                     onEndReachedThreshold={0.2}
                 />
+                {amount > 0 &&
+                <TouchableHighlight onPress={() => {navigate('Cart');}}>
+                    <View style={{...styles.productsButton, ...styles.loginButton}}>
+                        <Text style={styles.buttonText}>
+                            Go to Cart
+                        </Text>
+                    </View>
+                </TouchableHighlight>
+                }
                 <View style={{...styles.longButton}}>
                     <Text style={styles.buttonText}>
                         {this.state.error}
