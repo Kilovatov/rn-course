@@ -4,6 +4,7 @@ import styles from '../styles/styles'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import OfflineNote from '../components/OfflineNote';
 import SplashScreen from 'react-native-splash-screen'
+import { Sentry, SentrySeverity } from 'react-native-sentry';
 
 const PATTERN = [100, 500, 500];
 
@@ -31,6 +32,9 @@ export default class LoginScreen extends Component {
             const token = await AsyncStorage.getItem('token');
             if (email !== null && token !== null ) {
                 this.setState({email: email, loggedIn: true});
+                Sentry.setUserContext({
+                    email: email,
+                });
             }
         } catch (error) {}
     };
@@ -55,7 +59,12 @@ export default class LoginScreen extends Component {
         }).then((response) => response.json()).then((token) => {
             if (typeof token === 'string') {
                 this._storeData(this.state.email, token).then(
-                    () => navigate('Products')
+                    () => {
+                        Sentry.setUserContext({
+                            email: this.state.email,
+                        });
+                        navigate('Products');
+                    }
                 );
             } else {
                 this.setState({error: token.message});
@@ -76,9 +85,15 @@ export default class LoginScreen extends Component {
                     )
                 ]).start();
                 Vibration.vibrate(PATTERN);
+                Sentry.captureMessage(`login attempt failed: ${this.state.email} `, {
+                    level: SentrySeverity.Warning
+                });
             }
         }, (error) => {
             this.setState({error: error.message});
+            Sentry.captureMessage(`fetch failed: ${this.state.email} `, {
+                level: SentrySeverity.Warning
+            });
             navigate('Products');
         });
     };
