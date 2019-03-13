@@ -6,6 +6,11 @@ import LoginScreen from "./screens/LoginScreen";
 import ProductScreen from "./screens/ProductScreen";
 import MapScreen from "./screens/MapScreen";
 
+import { Sentry } from 'react-native-sentry';
+
+Sentry.config('https://92e773f2bb0c4e40abdba2c2624c7dd0@sentry.io/1395677').install();
+
+
 const AppNavigator = createAppContainer(createStackNavigator({
                 Home: {screen: LoginScreen},
                 Products: {screen: Products},
