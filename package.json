@@ -9,6 +9,7 @@
   "dependencies": {
     "react-native": "0.57.5",
     "react-native-gesture-handler": "^1.0.10",
+    "react-native-keychain": "3.0.0",
     "react-native-maps": "^0.22.1",
     "react-native-phone-call": "^1.0.9",
     "react-native-push-notification": "^3.1.2",

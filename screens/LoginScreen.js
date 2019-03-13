@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import OfflineNote from '../components/OfflineNote';
 import SplashScreen from 'react-native-splash-screen'
 import { Sentry, SentrySeverity } from 'react-native-sentry';
+import * as Keychain from 'react-native-keychain';
 
 const PATTERN = [100, 500, 500];
 
@@ -21,22 +22,34 @@ export default class LoginScreen extends Component {
 
     _storeData = async (email, token) => {
         try {
-            await AsyncStorage.setItem('email', email);
-            await AsyncStorage.setItem('token', token);
-        } catch (error) {}
+            await Keychain.setGenericPassword(email, token);
+            // await AsyncStorage.setItem('email', email);
+            // await AsyncStorage.setItem('token', token);
+        } catch (error) {
+            Sentry.captureMessage(`Keychain set attempt failed: ${this.state.email} `, {
+                level: SentrySeverity.Warning
+            });
+        }
     };
 
     _retrieveData = async () => {
         try {
-            const email = await AsyncStorage.getItem('email');
-            const token = await AsyncStorage.getItem('token');
+            const credentials = await Keychain.getGenericPassword();
+            const email = credentials.username;
+            const token = credentials.password;
+            // const email = await AsyncStorage.getItem('email');
+            // const token = await AsyncStorage.getItem('token');
             if (email !== null && token !== null ) {
                 this.setState({email: email, loggedIn: true});
                 Sentry.setUserContext({
                     email: email,
                 });
             }
-        } catch (error) {}
+        } catch (error) {
+            Sentry.captureMessage(`Keychain get attempt failed `, {
+                level: SentrySeverity.Warning
+            });
+        }
     };
 
     proceed = () => this.props.navigation.navigate('Products');

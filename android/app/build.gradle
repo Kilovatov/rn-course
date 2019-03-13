@@ -138,6 +138,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-keychain')
     compile project(':react-native-sentry')
     compile "com.google.android.gms:play-services-base:+"
     compile "com.google.android.gms:play-services-maps:+"
